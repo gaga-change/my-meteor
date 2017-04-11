@@ -28,11 +28,20 @@ insecure@1.0.7                # Allow all DB writes from clients (for prototypin
 
 ```
 
-#### npm包列表
 ```
   "dependencies": {
     "babel-runtime": "^6.20.0",
     "meteor-node-stubs": "~0.2.4"
   }
 ```
+### 2. 使用Vue
+> vue版本控制一下，因为不同版本的Vue塞入`App.vue`会有所不同，还会报错。
 
+ ``` 
+ meteor remove blaze-html-templates
+ meteor add static-html akryum:vue akryum:vue-component session
+ # 版本注意下，对Vue写法会有影响
+ meteor npm install --save vue
+ ```
+ 
+ 
