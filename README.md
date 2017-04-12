@@ -58,5 +58,12 @@ insecure@1.0.7                # Allow all DB writes from clients (for prototypin
  	accounts-ui
  	akryum:vue-blaze-template
  	accounts-password
+ 	
+ $ cnpm install bcrypt -S
+ ```
+ ### 5. 发送邮箱
+ 
+ ``` 
+ $ meteor add email
  ```
  

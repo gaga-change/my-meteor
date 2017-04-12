@@ -56,7 +56,7 @@ export default {
       this.buttonLabel = labels[Math.round(Math.random()*(labels.length - 1))];
     },
     sendEmail(){
-      console.log('0-o')
+      Meteor.call('sendEmail', 'Hello world !');
     }
   },
   components: {
