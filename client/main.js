@@ -12,12 +12,34 @@ import VueTracker from 'vue-meteor-tracker';
 Vue.use(VueTracker);
 
 import VueMeta from 'vue-meta';
-Vue.use(VueMeta)
+Vue.use(VueMeta);
 
 // Main app
-import App from '/imports/ui/App.vue';
+import AppLayout from '/imports/ui/AppLayout.vue';
+
+// Import the router factory
+import { RouterFactory, nativeScrollBehavior } from 'meteor/akryum:vue-router2'
+
+// Create router instance
+const routerFactory = new RouterFactory({
+  mode: 'history',
+  scrollBehavior: nativeScrollBehavior,
+})
+
+// App start
 Meteor.startup(() => {
+  // Create the router instance
+  const router = routerFactory.create()
+
+  // Start the Vue app
   new Vue({
-    render: h => h(App),
+    router,
+    ...AppLayout,
   }).$mount('#app');
 });
+
+// Meteor.startup(() => {
+//   new Vue({
+//     render: h => h(AppLayout),
+//   }).$mount('#app');
+// });

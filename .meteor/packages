@@ -26,3 +26,5 @@ accounts-ui
 akryum:vue-blaze-template
 accounts-password
 email
+akryum:vue-router2
+akryum:vue-stylus
