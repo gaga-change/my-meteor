@@ -50,3 +50,13 @@ insecure@1.0.7                # Allow all DB writes from clients (for prototypin
  $ meteor remove autopublish
  ```
  
+ ### 4. 账号登入插件
+ 
+ ```
+ $ meteor add 
+ 	accounts-base
+ 	accounts-ui
+ 	akryum:vue-blaze-template
+ 	accounts-password
+ ```
+ 
