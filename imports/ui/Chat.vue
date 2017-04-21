@@ -23,7 +23,7 @@ const test = {
     },
     messages() {
       return Messages.find({}, {
-        sort: { date: -1 },
+        sort: { date: 1 },
       });
     },
   },
@@ -41,7 +41,7 @@ export default {
   meteor: {
     messages() {
       return Messages.find({}, {
-        sort: { date: 1 },
+        sort: { date: -1 },
       });
     },
   },

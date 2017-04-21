@@ -1,84 +1,85 @@
 <template>
-<div class="app">
-  <h1>Simple Meteor example using Vue 2.x</h1>
-  <div v-blaze="'loginButtons'"></div>
-  <p v-if="user">
-    You are logged in as <b>{{ user.username }}</b>.
+  <div>
+    <router-link :to="{name: 'Home'}">回到主页</router-link>
+    <h1>Simple Meteor example using Vue 2.x</h1>
+    <div v-blaze="'loginButtons'"></div>
+    <p v-if="user">
+      You are logged in as <b>{{ user.username }}</b>.
   </p>
-  <p>
-    You pressed the button {{count}} time(s).
+    <p>
+      You pressed the button {{count}} time(s).
   </p>
-  <my-button :label="buttonLabel" @click="addOne"></my-button>
-  <my-button label="发送邮件测试按钮" @click="sendEmail"></my-button>
-  <p>
-    Learn more about the vue integration <a href="https://github.com/Akryum/meteor-vue-component">on GitHub</a>.
+    <my-button :label="buttonLabel" @click="addOne"></my-button>
+    <my-button label="发送邮件测试按钮" @click="sendEmail"></my-button>
+    <p>
+      Learn more about the vue integration <a href="https://github.com/Akryum/meteor-vue-component">on GitHub</a>.
   </p>
-  <chat></chat>
-</div>
+    <chat></chat>
+  </div>
 </template>
 
 <script>
-import Chat from './Chat.vue';
+  import Chat from './Chat.vue';
 
-import {Session} from 'meteor/session';
+  import {Session} from 'meteor/session';
 
 
-let labels = ['Click me!', 'Click me again!', 'Here! Click here!', 'Again! Again!',
-'Don\'t click me! No, I\'m just kidding. You can.', 'You like that?',
-'Can you stratch me in the back please?', 'You are soooo nice! Click!',
-'Hmmmm...', 'You know, you are wasting time clicking me.',
-'No really, you can click me as much as you want.', 'Click me to level up!'];
+  let labels = ['Click me!', 'Click me again!', 'Here! Click here!', 'Again! Again!',
+    'Don\'t click me! No, I\'m just kidding. You can.', 'You like that?',
+    'Can you stratch me in the back please?', 'You are soooo nice! Click!',
+    'Hmmmm...', 'You know, you are wasting time clicking me.',
+    'No really, you can click me as much as you want.', 'Click me to level up!'];
 
-export default {
-  data() {
-    return {
-      buttonLabel: 'Click me!',
-      count: 0,
-      user: null,
-    }
-  },
-  meteor: {
-    data: {
-      count () {
-        return Session.get('counter');
-      },
-      user () {
-        return Meteor.user()
-      },
-    }
-  },
-  created(){
-    Session.setDefault("counter", 0);
-  },
-  methods: {
-    addOne() {
-      Session.set('counter', this.count + 1);
-      this.buttonLabel = labels[Math.round(Math.random()*(labels.length - 1))];
+  export default {
+    data() {
+      return {
+        buttonLabel: 'Click me!',
+        count: 0,
+        user: null,
+      }
     },
-    sendEmail(){
-      Meteor.call('sendEmail', 'Hello world !');
-    }
-  },
-  components: {
-    Chat,
-  },
-  metaInfo: {
-    title: 'Meteor + Vue',
-  },
-};
+    meteor: {
+      data: {
+        count () {
+          return Session.get('counter');
+        },
+        user () {
+          return Meteor.user()
+        },
+      }
+    },
+    created(){
+      Session.setDefault("counter", 0);
+    },
+    methods: {
+      addOne() {
+        Session.set('counter', this.count + 1);
+        this.buttonLabel = labels[Math.round(Math.random() * (labels.length - 1))];
+      },
+      sendEmail(){
+        Meteor.call('sendEmail', 'Hello world !');
+      }
+    },
+    components: {
+      Chat,
+    },
+    metaInfo: {
+      title: 'Meteor + Vue',
+    },
+  };
 </script>
 
 <style>
-body {
-  margin: 30px;
-}
+  body {
+    margin: 30px;
+  }
 
-a {
-  color: #40b883;
-  text-decoration: none;
-}
+  a {
+    color: #40b883;
+    text-decoration: none;
+  }
 
-h1, h2 {
-  font-weight: normal;
-}
+  h1, h2 {
+    font-weight: normal;
+  }
 </style>

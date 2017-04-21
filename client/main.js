@@ -1,45 +1,48 @@
 // Libs
 import {Meteor} from 'meteor/meteor';
-import {Vue} from 'meteor/akryum:vue';
 import {Accounts} from 'meteor/accounts-base'
+// Import the router factory
+import {Vue} from 'meteor/akryum:vue';
+import VueMeta from 'vue-meta';
+import VueMeteorTracker  from 'vue-meteor-tracker';
+Vue.config.devtools = false;
+// import { RouterFactory, nativeScrollBehavior } from 'meteor/akryum:vue-router2'
+
+
+Vue.use(VueMeta);
+Vue.use(VueMeteorTracker);
+
+import router from '/imports/routes';
 
 
 Accounts.ui.config({
   passwordSignupFields: 'USERNAME_AND_EMAIL',
 });
 
-import VueTracker from 'vue-meteor-tracker';
-Vue.use(VueTracker);
-
-import VueMeta from 'vue-meta';
-Vue.use(VueMeta);
-
-// Main app
+// import NotFound from '/imports/ui/NotFound.vue';
 import AppLayout from '/imports/ui/AppLayout.vue';
 
-// Import the router factory
-import { RouterFactory, nativeScrollBehavior } from 'meteor/akryum:vue-router2'
 
-// Create router instance
-const routerFactory = new RouterFactory({
-  mode: 'history',
-  scrollBehavior: nativeScrollBehavior,
-})
+// const routerFactory = new RouterFactory({
+//   mode: 'history',
+//   scrollBehavior: nativeScrollBehavior,
+// });
 
-// App start
 Meteor.startup(() => {
-  // Create the router instance
-  const router = routerFactory.create()
-
-  // Start the Vue app
+  // const router = routerFactory.create();
   new Vue({
-    router,
-    ...AppLayout,
-  }).$mount('#app');
+    router: router.create(),
+    render: h => h(AppLayout),
+  }).$mount('app');
 });
 
-// Meteor.startup(() => {
-//   new Vue({
-//     render: h => h(AppLayout),
-//   }).$mount('#app');
-// });
+
+
+// RouterFactory.configure(router => {
+//   router.addRoute({
+//     path: '*',
+//     component: NotFound,
+//   });
+// }, -1);
+
+

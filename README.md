@@ -38,32 +38,93 @@ insecure@1.0.7                # Allow all DB writes from clients (for prototypin
 ### 2. 使用Vue
 > vue版本控制一下，因为不同版本的Vue塞入`App.vue`会有所不同，还会报错。
 
- ``` 
+ ```
  $ meteor remove blaze-html-templates
  $ meteor add static-html akryum:vue akryum:vue-component session
  # 版本注意下，对Vue写法会有影响
- $ meteor npm install --save vue
+ $ meteor npm install --save vue@2.2.6
  ```
+
+```
+# client/main.js
+
+Meteor.startup(() => {
+  new Vue({
+    render: h => h(App),
+  }).$mount('app');
+});
+
+```
+
+```
+# client/main.html
+
+<head>
+  <title> meteor-01</title>
+</head>
+
+<body>
+<app></app>
+</body>
+```
+
+
  ### 3. 数据库操作
- 
+
  ```
  $ meteor remove autopublish
  ```
- 
- ### 4. 账号登入插件
- 
+
+### 4. 账号登入插件
+
  ```
- $ meteor add 
+ $ meteor add
  	accounts-base
  	accounts-ui
  	akryum:vue-blaze-template
  	accounts-password
- 	
+
  $ cnpm install bcrypt -S
  ```
- ### 5. 发送邮箱
- 
- ``` 
+### 5. 发送邮箱
+
+ ```
  $ meteor add email
  ```
- 
+
+### 6. vue-router2.x
+
+添加新包
+ ```
+ $ meteor add akryum:vue-router2
+ $ meteor npm install --save vue-router@2.4.0
+ ```
+
+页面修改
+ ```
+ # client/main.js
+
+ import { RouterFactory, nativeScrollBehavior } from 'meteor/akryum:vue-router2'
+ import App from '/imports/ui/App.vue'
+ /**
+ * 创建路由实例
+ */
+ const routerFactory = new RouterFactory({
+  mode: 'history',
+  scrollBehavior: nativeScrollBehavior,
+ });
+
+ /**
+ * 在主页设置一个Vue入口
+ */
+ Meteor.startup(() => {
+  const router = routerFactory.create()
+  new Vue({
+    router,
+    render: h => h(App),
+  }).$mount('app');
+ });
+
+ ```
+
+ #
